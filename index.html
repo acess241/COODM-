@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mototaxi CODEMUC</title>
+    <meta name="description" content="Mototaxi CODEMUC: Reserve sua corrida com praticidade e segurança.">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #333;
+        }
+        header {
+            background-color: #FF5722;
+            text-align: center;
+            padding: 20px;
+            color: #ffffff;
+            border-bottom: 4px solid #000000;
+        }
+        header img {
+            max-width: 100%;
+            height: auto;
+        }
+        main {
+            padding: 15px;
+            max-width: 900px;
+            margin: auto;
+        }
+        h2 {
+            color: #FF5722;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .block {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            background-color: rgba(255, 165, 0, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .block img {
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .info {
+            font-size: 1.1em;
+            color: #333;
+            flex: 1;
+        }
+        .status {
+            color: green;
+            font-weight: bold;
+        }
+        .button {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            background-color: #FF5722;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .button:hover {
+            background-color: #E64A19;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+        }
+        .modal-content label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .modal-content input,
+        .modal-content select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .modal-content button {
+            background-color: #FF5722;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+        }
+        .modal-content button:hover {
+            background-color: #E64A19;
+        }
+        .cancel-button {
+            background-color: #ccc;
+            color: black;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .cancel-button:hover {
+            background-color: #999;
+        }
+        /* Ajustes de responsividade */
+        @media screen and (max-width: 768px) {
+            .block {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .button {
+                position: relative;
+                margin-top: 10px;
+            }
+            header img {
+                max-width: 80%;
+            }
+            .info {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://i.postimg.cc/Y0vDktML/ololol.jpg" alt="Logo do CODEMUC">
+    </header>
+    <main>
+        <h2>Mototáxis Disponíveis</h2>
+
+        <!-- Mototáxi de Joseilton Santos -->
+        <div class="block">
+            <img src="https://i.postimg.cc/Dz3DDwhD/IMG-1762.jpg" alt="Mototáxi de Joseilton Santos">
+            <div class="info">
+                <p><strong>Joseilton Santos</strong> - Disponível 🟢</p>
+                <p>Modelo: Titan 150</p>
+                <p>Valor: R$ 5,50</p>
+                <p><strong>Telefone:</strong> +55 74 9912 3143</p>
+            </div>
+            <button class="button" onclick="openModal('Joseilton Santos', 'Titan 150')">Finalizar Corrida</button>
+        </div>
+
+        <!-- Mototáxi de Victor Pereira Da Silva -->
+        <div class="block">
+            <img src="https://i.postimg.cc/wThbNdLQ/IMG-1764.jpg" alt="Mototáxi de Victor Pereira Da Silva">
+            <div class="info">
+                <p><strong>Victor Pereira Da Silva</strong> - Disponível 🟢</p>
+                <p>Modelo: Fan 160</p>
+                <p>Valor: R$ 5,50</p>
+                <p><strong>Telefone:</strong> +55 74 999 442662</p>
+            </div>
+            <button class="button" onclick="openModal('Victor Pereira Da Silva', 'Fan 160')">Finalizar Corrida</button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <h3>Finalizar Corrida</h3>
+                <form id="reservationForm">
+                    <label>Meu nome:</label>
+                    <input type="text" id="nome" required>
+                    
+                    <label>Minha localização:</label>
+                    <input type="text" id="localizacao" required>
+                    
+                    <label>Vou para:</label>
+                    <input type="text" id="destino" required>
+                    
+                    <label>Método de pagamento:</label>
+                    <select id="metodoPagamento" required>
+                        <option value="PIX">PIX</option>
+                        <option value="Dinheiro">Dinheiro</option>
+                        <option value="Cartão">Cartão</option>
+                    </select>
+
+                    <label>Precisa de troco?</label>
+                    <select id="trocoSelect" onchange="toggleTrocoInput()">
+                        <option value="Não">Não</option>
+                        <option value="Sim">Sim</option>
+                    </select>
+
+                    <div id="trocoDiv" style="display:none;">
+                        <label>Quanto de troco?</label>
+                        <input type="number" id="troco">
+                    </div>
+
+                    <label>Ponto de referência:</label>
+                    <input type="text" id="referencia" required>
+
+                    <button type="button" class="cancel-button" onclick="closeModal()">Cancelar</button>
+                    <button type="button" onclick="sendWhatsApp()">Finalizar Corrida</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let selectedMoto = {};
+
+        function openModal(nome, modelo) {
+            selectedMoto.name = nome;
+            selectedMoto.model = modelo;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function toggleTrocoInput() {
+            const trocoSelect = document.getElementById('trocoSelect').value;
+            const trocoDiv = document.getElementById('trocoDiv');
+            if (trocoSelect === 'Sim') {
+                trocoDiv.style.display = 'block';
+            } else {
+                trocoDiv.style.display = 'none';
+            }
+        }
+
+        function sendWhatsApp() {
+            const nome = document.getElementById('nome').value;
+            const localizacao = document.getElementById('localizacao').value;
+            const destino = document.getElementById('destino').value;
+            const metodoPagamento = document.getElementById('metodoPagamento').value;
+            const troco = document.getElementById('troco').value || 'Não precisa';
+            const referencia = document.getElementById('referencia').value;
+
+            if (!nome || !localizacao || !destino || !metodoPagamento || !referencia) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+
+            const message = encodeURIComponent(`Olá vim do site CODEMUC 🤩🧡
+🙋‍♂️ Finalizar corrida com o motoboy: ${selectedMoto.name}
+🛵 Modelo da moto: ${selectedMoto.model}
+🤷 Meu nome é: ${nome}
+🧭 Minha localização é: ${localizacao}
+📍 Vou para: ${destino}
+💸 Método de pagamento: ${metodoPagamento}
+💰 Precisa de troco: ${troco}
+📌 Ponto de referência: ${referencia}
+Obrigado(a) 🥰🧡`);
+
+            const phoneNumber = selectedMoto.name === "Joseilton Santos" ? "5574999123143" : "5574999442662";
+
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+            closeModal();
+        }
+    </script>
+</body>
+</html>
