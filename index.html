@@ -3,78 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mototaxi CODEMUC</title>
-    <meta name="description" content="Mototaxi CODEMUC: Reserve sua corrida com praticidade e segurança.">
+    <title>CODEMUC - Corridas Rápidas e Seguras em Uauá!</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff;
+            background-color: #f8f8f8;
             color: #333;
         }
         header {
             background-color: #FF5722;
+            color: white;
             text-align: center;
             padding: 20px;
-            color: #ffffff;
-            border-bottom: 4px solid #000000;
         }
         header img {
+            width: 700px;
             max-width: 100%;
             height: auto;
         }
+        .highlight {
+            background-color: #FFE0B2;
+            border: 2px solid #FF5722;
+            color: #FF5722;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 8px;
+        }
         main {
-            padding: 15px;
             max-width: 900px;
             margin: auto;
+            padding: 20px;
         }
-        h2 {
-            color: #FF5722;
-            text-align: center;
+        .tab {
             margin-bottom: 20px;
+        }
+        .tab h2 {
+            font-size: 1.5em;
+            color: #FF5722;
+            margin-bottom: 10px;
         }
         .block {
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            background-color: rgba(255, 165, 0, 0.8);
+            background-color: #ffe0b2;
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: relative;
         }
         .block img {
             width: 120px;
             height: 120px;
             border-radius: 12px;
             margin-right: 15px;
-            flex-shrink: 0;
         }
         .info {
             font-size: 1.1em;
-            color: #333;
             flex: 1;
         }
-        .status {
-            color: green;
-            font-weight: bold;
-        }
-        .button {
-            position: absolute;
-            right: 20px;
-            bottom: 20px;
+        .info button {
             background-color: #FF5722;
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 10px 15px;
+            padding: 10px 20px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 1em;
+            margin-top: 10px;
         }
-        .button:hover {
+        .info button:hover {
             background-color: #E64A19;
         }
         .modal {
@@ -87,194 +91,214 @@
             background-color: rgba(0, 0, 0, 0.5);
             justify-content: center;
             align-items: center;
+            z-index: 1000;
         }
         .modal-content {
-            background-color: #fff;
+            background-color: white;
             padding: 20px;
-            border-radius: 12px;
-            max-width: 500px;
+            border-radius: 10px;
+            max-width: 400px;
             width: 90%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .modal-content h2 {
+            margin-top: 0;
+            color: #FF5722;
         }
         .modal-content label {
             display: block;
-            margin-bottom: 10px;
+            margin-top: 10px;
         }
-        .modal-content input,
-        .modal-content select {
+        .modal-content input, .modal-content select, .modal-content button {
             width: 100%;
-            padding: 8px;
-            margin-bottom: 20px;
+            padding: 10px;
+            margin-top: 5px;
             border: 1px solid #ccc;
-            border-radius: 6px;
+            border-radius: 5px;
+            font-size: 1em;
         }
         .modal-content button {
             background-color: #FF5722;
             color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 10px 15px;
             cursor: pointer;
-            font-size: 1em;
-            width: 100%;
+            border: none;
         }
         .modal-content button:hover {
             background-color: #E64A19;
         }
         .cancel-button {
-            background-color: #ccc;
+            background-color: #ddd;
             color: black;
-            border-radius: 8px;
-            padding: 10px 15px;
             margin-top: 10px;
-            width: 100%;
         }
         .cancel-button:hover {
-            background-color: #999;
-        }
-        /* Ajustes de responsividade */
-        @media screen and (max-width: 768px) {
-            .block {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .button {
-                position: relative;
-                margin-top: 10px;
-            }
-            header img {
-                max-width: 80%;
-            }
-            .info {
-                font-size: 1em;
-            }
+            background-color: #ccc;
         }
     </style>
 </head>
 <body>
     <header>
-        <img src="https://i.postimg.cc/Y0vDktML/ololol.jpg" alt="Logo do CODEMUC">
+        <img src="https://i.postimg.cc/Y0vDktML/ololol.jpg" alt="Logo CODEMUC">
     </header>
+
+    <div class="highlight">
+        Horário de atendimento: das 6:00 às 19:00. Agora são: <span id="horarioAtual"></span>
+    </div>
+
     <main>
-        <h2>Mototáxis Disponíveis</h2>
+        <!-- Aba Uauá [SEDE] -->
+        <div class="tab">
+            <h2>Mototáxis Disponíveis - Uauá [SEDE]</h2>
 
-        <!-- Mototáxi de Joseilton Santos -->
-        <div class="block">
-            <img src="https://i.postimg.cc/Dz3DDwhD/IMG-1762.jpg" alt="Mototáxi de Joseilton Santos">
-            <div class="info">
-                <p><strong>Joseilton Santos</strong> - Disponível 🟢</p>
-                <p>Modelo: Titan 150</p>
-                <p>Valor: R$ 5,50</p>
-                <p><strong>Telefone:</strong> +55 74 9912 3143</p>
+            <!-- Mototáxi de Victor Pereira -->
+            <div class="block">
+                <img src="https://i.postimg.cc/wThbNdLQ/IMG-1764.jpg" alt="Mototáxi de Victor Pereira">
+                <div class="info">
+                    <p><strong>Victor Pereira</strong> - Disponível 🟢</p>
+                    <p>Modelo: Fan 160</p>
+                    <p>Valor: R$ 5,00</p>
+                    <button onclick="abrirModal('Victor Pereira', '55749999442662')">Finalizar Corrida</button>
+                </div>
             </div>
-            <button class="button" onclick="openModal('Joseilton Santos', 'Titan 150')">Finalizar Corrida</button>
+
+            <!-- Mototáxi de Rodrigo da Silva -->
+            <div class="block">
+                <img src="https://i.postimg.cc/gJN6LRs1/IMG-2058.jpg" alt="Mototáxi de Rodrigo da Silva">
+                <div class="info">
+                    <p><strong>Rodrigo da Silva</strong> - Disponível 🟢</p>
+                    <p>Modelo: Fan 160 Vermelha</p>
+                    <p>Valor: R$ 5,00</p>
+                    <button onclick="abrirModal('Rodrigo da Silva', '5574999876030')">Finalizar Corrida</button>
+                </div>
+            </div>
+
+            <!-- Mototáxi de Joseilton Santos -->
+            <div class="block">
+                <img src="https://i.postimg.cc/Dz3DDwhD/IMG-1762.jpg" alt="Mototáxi de Joseilton Santos">
+                <div class="info">
+                    <p><strong>Joseilton Santos</strong> - Disponível 🟢</p>
+                    <p>Modelo: Titan 150</p>
+                    <p>Valor: R$ 5,00</p>
+                    <button onclick="abrirModal('Joseilton Santos', '5574999123143')">Finalizar Corrida</button>
+                </div>
+            </div>
         </div>
 
-        <!-- Mototáxi de Victor Pereira Da Silva -->
-        <div class="block">
-            <img src="https://i.postimg.cc/wThbNdLQ/IMG-1764.jpg" alt="Mototáxi de Victor Pereira Da Silva">
-            <div class="info">
-                <p><strong>Victor Pereira Da Silva</strong> - Disponível 🟢</p>
-                <p>Modelo: Fan 160</p>
-                <p>Valor: R$ 5,50</p>
-                <p><strong>Telefone:</strong> +55 74 999 442662</p>
-            </div>
-            <button class="button" onclick="openModal('Victor Pereira Da Silva', 'Fan 160')">Finalizar Corrida</button>
-        </div>
+        <!-- Aba Caratacá -->
+        <div class="tab">
+            <h2>Mototáxi Disponível - Caratacá</h2>
 
-        <!-- Modal -->
-        <div class="modal" id="modal">
-            <div class="modal-content">
-                <h3>Finalizar Corrida</h3>
-                <form id="reservationForm">
-                    <label>Meu nome:</label>
-                    <input type="text" id="nome" required>
-                    
-                    <label>Minha localização:</label>
-                    <input type="text" id="localizacao" required>
-                    
-                    <label>Vou para:</label>
-                    <input type="text" id="destino" required>
-                    
-                    <label>Método de pagamento:</label>
-                    <select id="metodoPagamento" required>
-                        <option value="PIX">PIX</option>
-                        <option value="Dinheiro">Dinheiro</option>
-                        <option value="Cartão">Cartão</option>
-                    </select>
-
-                    <label>Precisa de troco?</label>
-                    <select id="trocoSelect" onchange="toggleTrocoInput()">
-                        <option value="Não">Não</option>
-                        <option value="Sim">Sim</option>
-                    </select>
-
-                    <div id="trocoDiv" style="display:none;">
-                        <label>Quanto de troco?</label>
-                        <input type="number" id="troco">
-                    </div>
-
-                    <label>Ponto de referência:</label>
-                    <input type="text" id="referencia" required>
-
-                    <button type="button" class="cancel-button" onclick="closeModal()">Cancelar</button>
-                    <button type="button" onclick="sendWhatsApp()">Finalizar Corrida</button>
-                </form>
+            <!-- Mototáxi de Samuel Araujo Silva -->
+            <div class="block">
+                <img src="https://i.postimg.cc/gcSbND0r/IMG-2063.jpg" alt="Mototáxi de Samuel Araujo Silva">
+                <div class="info">
+                    <p><strong>Samuel Araujo Silva</strong> - Disponível 🟢</p>
+                    <p>Modelo: CG FAN 125 Vermelha</p>
+                    <p>Valor: Combinar com o mototaxista</p>
+                    <button onclick="abrirModal('Samuel Araujo Silva', '5574999876030')">Finalizar Corrida</button>
+                </div>
             </div>
         </div>
     </main>
 
+    <!-- Modal -->
+    <div class="modal" id="modalFinalizar">
+        <div class="modal-content">
+            <h2>Finalizar Corrida</h2>
+            <form id="formFinalizar" onsubmit="enviarWhatsApp(event)">
+                <!-- Nome do Passageiro -->
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <!-- Local de Embarque e Destino -->
+                <label for="localEmbarque">Local de Embarque:</label>
+                <input type="text" id="localEmbarque" name="localEmbarque" required>
+
+                <label for="destino">Destino (Ponto de Referência):</label>
+                <input type="text" id="destino" name="destino" required>
+
+                <!-- Forma de Pagamento e Troco -->
+                <label for="valor">Valor:</label>
+                <input type="text" id="valor" name="valor" value="5,00" required>
+
+                <label for="troco">Precisa de troco?</label>
+                <select id="troco" name="troco" onchange="mostrarDetalhesTroco()">
+                    <option value="Não">Não</option>
+                    <option value="Sim">Sim</option>
+                </select>
+
+                <!-- Detalhes para troco -->
+                <div id="detalhesTroco" style="display: none;">
+                    <label for="valorTroco">Troco para quanto?</label>
+                    <input type="number" id="valorTroco" name="valorTroco">
+
+                    <label for="telefone">Telefone para Contato:</label>
+                    <input type="text" id="telefone" name="telefone" required>
+                </div>
+
+                <button type="submit">Finalizar Corrida</button>
+                <button type="button" class="cancel-button" onclick="fecharModal()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        let selectedMoto = {};
-
-        function openModal(nome, modelo) {
-            selectedMoto.name = nome;
-            selectedMoto.model = modelo;
-            document.getElementById('modal').style.display = 'flex';
+        function atualizarHorario() {
+            const data = new Date();
+            const hora = data.getHours();
+            const minutos = data.getMinutes();
+            const segundos = data.getSeconds();
+            document.getElementById('horarioAtual').innerText = `${hora}:${minutos}:${segundos}`;
         }
 
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
+        function abrirModal(motorista, telefone) {
+            document.getElementById('modalFinalizar').style.display = 'flex';
+            document.getElementById('motorista').value = motorista;
+            document.getElementById('telefone').value = telefone;
         }
 
-        function toggleTrocoInput() {
-            const trocoSelect = document.getElementById('trocoSelect').value;
-            const trocoDiv = document.getElementById('trocoDiv');
-            if (trocoSelect === 'Sim') {
-                trocoDiv.style.display = 'block';
+        function fecharModal() {
+            document.getElementById('modalFinalizar').style.display = 'none';
+        }
+
+        function mostrarDetalhesTroco() {
+            const troco = document.getElementById('troco').value;
+            const detalhesTroco = document.getElementById('detalhesTroco');
+            if (troco === 'Sim') {
+                detalhesTroco.style.display = 'block';
             } else {
-                trocoDiv.style.display = 'none';
+                detalhesTroco.style.display = 'none';
             }
         }
 
-        function sendWhatsApp() {
+        function enviarWhatsApp(event) {
+            event.preventDefault();
             const nome = document.getElementById('nome').value;
-            const localizacao = document.getElementById('localizacao').value;
+            const valor = document.getElementById('valor').value;
+            const troco = document.getElementById('troco').value;
+            const valorTroco = document.getElementById('valorTroco').value;
+            const localEmbarque = document.getElementById('localEmbarque').value;
             const destino = document.getElementById('destino').value;
-            const metodoPagamento = document.getElementById('metodoPagamento').value;
-            const troco = document.getElementById('troco').value || 'Não precisa';
-            const referencia = document.getElementById('referencia').value;
+            const motorista = document.getElementById('motorista').value;
+            const telefone = document.getElementById('telefone').value;
 
-            if (!nome || !localizacao || !destino || !metodoPagamento || !referencia) {
-                alert('Por favor, preencha todos os campos.');
-                return;
+            let mensagem = `Olá, gostaria de finalizar uma corrida.\n` +
+                `👤 Nome: ${nome}\n` +
+                `🚴‍♂️ Mototáxi: ${motorista}\n` +
+                `💵 Valor: R$ ${valor}\n` +
+                `🪙 Troco: ${troco}`;
+                
+            if (troco === 'Sim') {
+                mensagem += `\n🪙 Troco para: R$ ${valorTroco}\n` +
+                            `📍 Local de Embarque: ${localEmbarque}\n` +
+                            `📍 Destino: ${destino}`;
             }
 
-            const message = encodeURIComponent(`Olá vim do site CODEMUC 🤩🧡
-🙋‍♂️ Finalizar corrida com o motoboy: ${selectedMoto.name}
-🛵 Modelo da moto: ${selectedMoto.model}
-🤷 Meu nome é: ${nome}
-🧭 Minha localização é: ${localizacao}
-📍 Vou para: ${destino}
-💸 Método de pagamento: ${metodoPagamento}
-💰 Precisa de troco: ${troco}
-📌 Ponto de referência: ${referencia}
-Obrigado(a) 🥰🧡`);
-
-            const phoneNumber = selectedMoto.name === "Joseilton Santos" ? "5574999123143" : "5574999442662";
-
-            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-            closeModal();
+            window.open(`https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`, '_blank');
+            fecharModal();
         }
+
+        setInterval(atualizarHorario, 1000);
     </script>
 </body>
 </html>
